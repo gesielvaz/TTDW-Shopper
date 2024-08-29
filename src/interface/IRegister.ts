@@ -1,4 +1,4 @@
-export interface IUpdateImg {
+export interface IRegister {
     image?: string;
     customer_code?: string;
     measure_datetime?: Date;
@@ -6,9 +6,8 @@ export interface IUpdateImg {
     has_confirmed?: boolean;
     image_url?: string;
   }
-  
-  export interface IUpdateImgCreate extends IUpdateImg {
+
+  export interface IRegisterCreate extends IRegister {
     status_active: boolean;
     created_at: Date;
   }
-  

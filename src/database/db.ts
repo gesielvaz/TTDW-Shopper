@@ -1,6 +1,7 @@
 import "dotenv/config";
 import { DataSource } from "typeorm";
-import { UploadImg } from "../entities/uploadImg";
+import { Register } from "../entities/register";
+
 
 
 export const AppDataSource = new DataSource ( {
@@ -12,6 +13,6 @@ export const AppDataSource = new DataSource ( {
       database: process.env.DATABASE,
       synchronize: true,
       logging: true,
-      entities: [UploadImg],
+      entities: [Register],
     }
 );

@@ -1,6 +1,6 @@
 import { Joi, Segments, celebrate } from 'celebrate';
-
-export const ValidadeUploadImg = celebrate({
+console.log("VALIDATE")
+export const ValidadeRegister = celebrate({
   [Segments.BODY]: {
     image: Joi.string().trim().required(),
     customer_code: Joi.string().trim().required(),

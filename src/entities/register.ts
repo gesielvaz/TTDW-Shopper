@@ -1,8 +1,8 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 import { Base } from './base';
 
-@Entity('uploadImg')
-export class UploadImg extends Base  {
+@Entity('register')
+export class Register extends Base  {
   @PrimaryGeneratedColumn()
   id!: string;
 

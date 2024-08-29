@@ -1,22 +1,23 @@
 import { Request, Response, NextFunction } from "express";
-import { IUpdateImg } from "../interface/IUploadImg";
-import { PutUploadImgServices } from "../services/uploadImg/create";
 import { formatResponse } from "../adapters/formatResponse";
 import errorHandler from "../errors/errorHandler";
+import { IRegister } from "../interface/IRegister";
+import { RegisterServices } from "../services/register/create";
 
-export const postUploadImg = async (
+export const CreateRegister = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
+  console.log("Upload Entro ")
   try {
     const { body } = req;
 
-    const data: IUpdateImg = {
+    const data: IRegister = {
       ...body,
     };
 
-    const result = await PutUploadImgServices(data);
+    const result = await RegisterServices(data);
 
     return formatResponse(res, 200, "Success", result);
   } catch (error) {

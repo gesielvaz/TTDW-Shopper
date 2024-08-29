@@ -1,23 +1,22 @@
-
 import express, { NextFunction, Request, Response } from "express";
 import cors from "cors";
 import fileUpload from "express-fileupload";
 import bodyParser from "body-parser";
 import morgan from "morgan";
-import postImg from "../routes/uploadImg.routes"
+import register from "../routes/register.routes"; // Verifique o caminho
+import errorHandler from "../errors/errorHandler"
 class Server {
   private server = express();
   private port = process.env.SERVER_PORT || 8081;
 
   private paths = {
-    health: "/",
-    postImg: "/api/postImg",
+
+    register: "/api/register",
   };
 
   constructor() {
     this.middlewares();
     this.routes();
-    this.server.use(this.errorHandler); // Use um middleware de erro customizado
   }
 
   private middlewares(): void {
@@ -51,28 +50,18 @@ class Server {
       })
     );
 
-    this.server.use(Error);
+    // Remova o uso de Error como middleware
   }
 
   private routes() {
-    this.server.get(this.paths.health, (req: Request, res: Response) => {
-      res.send({
-        status: true,
-        version: 1.0,
-        service: "turist",
-      });
-    });
-
-    this.server.use(this.paths.postImg, postImg);
+    this.server.use(this.paths.register, register);
+    this.server.use(errorHandler);
   }
 
-  private errorHandler(err: any, req: Request, res: Response, next: NextFunction) {
-    res.status(err.status || 500).send({ error: err.message || 'Internal Server Error' });
-  }
-
+ 
   listen() {
     this.server.listen(this.port, () => {
-      console.log("Running server ", this.port);
+      console.log("Running server on port", this.port);
     });
   }
 }
