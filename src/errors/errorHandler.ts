@@ -6,8 +6,6 @@ import { formatResponse } from "../adapters/formatResponse";
 import { Err } from "./customError";
 
 function errorHandler(err: any, req: Request, res: Response, next: NextFunction) {
-    
-	// Celebrate Errors
 	if (err && err.details) {
 		const validationError = createValidationError(err.details);
 		return formatResponse(
@@ -16,7 +14,6 @@ function errorHandler(err: any, req: Request, res: Response, next: NextFunction)
 			`Validation Error ${validationError._error}`
 		);
 	}
-	// Our Errors
 	if (err instanceof Err) {
 		return formatResponse(res, err.code, err.message, err.body);
 	}

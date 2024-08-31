@@ -1,26 +1,19 @@
-import { Request, Response, NextFunction } from "express";
-import { formatResponse } from "../adapters/formatResponse";
-import errorHandler from "../errors/errorHandler";
-import { IRegister } from "../interface/IRegister";
+import { NextFunction, Request, Response } from "express";
 import { RegisterServices } from "../services/register/create";
+import errorHandler from "../errors/errorHandler";
 
-export const CreateRegister = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  console.log("Upload Entro ")
-  try {
-    const { body } = req;
 
-    const data: IRegister = {
-      ...body,
-    };
+export async function Create(req: Request, res: Response,  next: NextFunction) {
+    try {
+        const { image, customer_code, measure_datetime, measure_type } = req.body;
 
-    const result = await RegisterServices(data);
+        const result = await RegisterServices({
+            image, customer_code, measure_datetime, measure_type,
+            has_confirmed: false
+        });
 
-    return formatResponse(res, 200, "Success", result);
-  } catch (error) {
-    return errorHandler(error, req, res, next);
-  }
-};
+        return res.status(200).json(result);
+    } catch (error) {
+        return errorHandler(error, req, res, next);
+    }
+}

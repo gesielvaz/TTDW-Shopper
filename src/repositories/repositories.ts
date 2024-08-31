@@ -1,7 +1,6 @@
 import { Register } from "../entities/register";
-import { IRegister } from "../interface/IRegister";
 
-export const RegisterRepository = (insertData?: IRegister) => {
+export const RegisterRepository = () => {
   return Register.getRepository();
 };
 

@@ -1,26 +1,26 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
-import { Base } from './base';
+import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Base } from "./base";
 
-@Entity('register')
-export class Register extends Base  {
-  @PrimaryGeneratedColumn()
+@Entity()
+export class Register extends Base{
+    @PrimaryGeneratedColumn('uuid')
   id!: string;
 
-  @Column({ type: 'text' })
+    @Column()
   image!: string;
 
-  @Column({ type: 'varchar', length: 255 })
+    @Column()
   customer_code!: string;
 
-  @Column({ type: 'timestamp' })
+    @Column({ type: 'datetime' })
   measure_datetime!: Date;
 
-  @Column({ type: 'enum', enum: ['WATER', 'GAS'] })
+    @Column()
   measure_type!: 'WATER' | 'GAS';
 
-  @Column({ type: 'boolean', default: false })
-  has_confirmed!: boolean;
+    @Column('decimal')
+  reading_value!: number;
 
-  @Column({ type: 'varchar', length: 255, nullable: true })
-  image_url?: string;
+    @Column()
+  guid!: string;
 }
